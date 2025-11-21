@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- =============================================================== -->
+    <!-- 1. 聲明父專案，它會繼承 parent pom 的 groupId 和 version          -->
+    <!-- =============================================================== -->
+    <parent>
+        <groupId>org.sputnikdev</groupId>
+        <artifactId>bluetooth-gatt-parser-parent</artifactId>
+        <version>1.9.5-SNAPSHOT</version>
+        <!-- 相對路徑，告訴 Maven 父 POM 在上一層目錄 -->
+        <relativePath>../</relativePath>
+    </parent>
+
+    <!-- =============================================================== -->
+    <!-- 2. 子模組自己的 artifactId                                     -->
+    <!-- =============================================================== -->
+    <artifactId>bluetooth-gatt-parser</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Bluetooth GATT Parser</name>
+
+    <!-- =============================================================== -->
+    <!-- 3. 聲明這個模組需要用到的依賴 (無需版本號)                      -->
+    <!-- =============================================================== -->
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <!-- 測試依賴 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- =============================================================== -->
+    <!-- 4. 定義只屬於這個模組的建置邏輯 (包含 sourceSets)                -->
+    <!-- =============================================================== -->
+    <build>
+        <!-- 使用類似 Gradle sourceSets 的功能，重新指定源碼和資源目錄 -->
+        <sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/../src/test/java</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/../src/main/resources</directory>
+            </resource>
+            <!-- 舊 pom 中包含了 groovy 腳本生成的資源，這裡也保留 -->
+            <resource>
+                <directory>target/generated-sources/groovy</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/../src/test/resources</directory>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <!-- Jacoco 插件的使用 -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Coveralls 插件 -->
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+            </plugin>
+            <!-- Checkstyle 插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <!-- 配置文件路徑是相對於根目錄的 -->
+                            <configLocation>${project.basedir}/../checkstyle.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>false</failsOnError>
+                            <failOnViolation>false</failOnViolation>
+                            <violationSeverity>warning</violationSeverity>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Groovy 腳本執行插件 -->
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
+                <dependencies>
+                    <!-- 這個插件需要單獨指定 groovy-all 的版本 -->
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-all</artifactId>
+                        <version>2.4.13</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <scriptpath>
+                                <!-- 腳本路徑是相對於根目錄的 -->
+                                <element>${project.basedir}/../src/main/script</element>
+                            </scriptpath>
+                            <source>
+                                GattRegistryGenerator.generate(project)
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
