@@ -110,3 +110,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "bluetooth-gatt-parser"
+include ':bluetooth-gatt-parser'
