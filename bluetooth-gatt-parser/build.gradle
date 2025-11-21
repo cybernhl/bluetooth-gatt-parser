@@ -3,6 +3,7 @@ import groovy.json.JsonBuilder
 plugins {
     id "java-library"
     id "groovy-base"
+    alias(libs.plugins.kotlin.jvm)
 }
 
 group = 'org.sputnikdev'
@@ -95,6 +96,10 @@ java {
     targetCompatibility JavaVersion.VERSION_1_8
 }
 
+kotlin {
+    jvmToolchain(8)
+}
+
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -106,6 +111,7 @@ tasks.withType(Javadoc) {
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
+    implementation libs.kotlin.stdlib
     api libs.org.slf4j.slf4j.api
     api libs.com.thoughtworks.xstream.xstream
     api libs.gson

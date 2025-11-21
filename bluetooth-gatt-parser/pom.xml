@@ -28,6 +28,10 @@
     <!-- =============================================================== -->
     <dependencies>
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
@@ -75,8 +79,13 @@
     <!-- =============================================================== -->
     <build>
         <!-- 使用類似 Gradle sourceSets 的功能，重新指定源碼和資源目錄 -->
-        <sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/../src/test/java</testSourceDirectory>
+        <!--
+            由於我們要混合編譯，`sourceDirectory` 由 Kotlin 插件接管，
+            這裡的 `sourceDirectory` 和 `testSourceDirectory` 可以移除，
+            以避免與 Kotlin 插件的配置衝突。
+        -->
+        <!-- <sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory> -->
+        <!-- <testSourceDirectory>${project.basedir}/../src/test/java</testSourceDirectory> -->
         <resources>
             <resource>
                 <directory>${project.basedir}/../src/main/resources</directory>
@@ -93,6 +102,55 @@
         </testResources>
 
         <plugins>
+            <!-- ✨  應用 Kotlin 插件並配置混合編譯 -->
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <goals> <goal>compile</goal> </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <!-- 添加 Java 原始碼目錄 -->
+                                <sourceDir>${project.basedir}/../src/main/java</sourceDir>
+                                <!-- 如果有 Kotlin 原始碼，也添加進來 (即使現在沒有) -->
+                                <sourceDir>${project.basedir}/../src/main/kotlin</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <goals> <goal>test-compile</goal> </goals>
+                        <configuration>
+                            <sourceDirs>
+                                <!-- 添加 Java 測試程式碼目錄 -->
+                                <sourceDir>${project.basedir}/../src/test/java</sourceDir>
+                                <!-- 如果有 Kotlin 測試程式碼，也添加進來 -->
+                                <sourceDir>${project.basedir}/../src/test/kotlin</sourceDir>
+                            </sourceDirs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- ✨ 3. 應用 Java 編譯器插件 (執行在 Kotlin 插件之後) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>java-compile</id>
+                        <phase>compile</phase>
+                        <goals> <goal>compile</goal> </goals>
+                    </execution>
+                    <execution>
+                        <id>java-test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals> <goal>testCompile</goal> </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- Jacoco 插件的使用 -->
             <plugin>
                 <groupId>org.jacoco</groupId>
