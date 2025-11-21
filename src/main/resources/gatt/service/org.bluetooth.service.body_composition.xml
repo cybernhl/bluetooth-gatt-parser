@@ -1,33 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2014 Bluetooth SIG, Inc. All rights reserved. -->
-<Service xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/service.xsd"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="org.bluetooth.service.body_composition"
-         last-modified="2014-10-17" approved="Yes" uuid="181B" name="Body Composition">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 Bluetooth SIG, Inc. All rights reserved. -->
+<Service xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/service.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         type="org.bluetooth.service.body_composition" last-modified="2014-10-17" approved="Yes" uuid="181B" name="Body Composition">
     <InformativeText>
         <Abstract>
-            This service exposes data related to body composition from a body composition analyzer intended for
-            consumer healthcare and sports/fitness applications.
-        </Abstract>
+            This service exposes data related to body composition from a body composition analyzer intended for consumer healthcare and sports/fitness applications.
+		</Abstract>
         <Summary>
-            The Body Composition Service (BCS) exposes data related to body composition from a body composition
-            analyzer (Server) intended for consumer healthcare as well as sports/fitness applications.
-        </Summary>
-    </InformativeText>
+            The Body Composition Service (BCS) exposes data related to body composition from a body composition analyzer (Server) intended for consumer healthcare as well as sports/fitness applications.
+		</Summary>
+	</InformativeText>
     <Dependencies>
         <Dependency>
-            This service is not dependent upon any other services.
-        </Dependency>
-    </Dependencies>
+                    This service is not dependent upon any other services.
+		</Dependency>
+	</Dependencies>
     <GATTRequirements>
         <Requirement subProcedure="Indications">Mandatory</Requirement>
         <Requirement subProcedure="Read Characteristic Descriptors">Mandatory</Requirement>
         <Requirement subProcedure="Write Characteristic Descriptors">Mandatory</Requirement>
-    </GATTRequirements>
+	</GATTRequirements>
     <Transports>
         <Classic>true</Classic>
         <LowEnergy>true</LowEnergy>
         <HighSpeed>true</HighSpeed>
-    </Transports>
-    <ErrorCodes></ErrorCodes>
+	</Transports>
+    <ErrorCodes>
+        
+	</ErrorCodes>
     <Characteristics>
         <Characteristic type="org.bluetooth.characteristic.body_composition_feature" name="Body Composition Feature">
             <Requirement>Mandatory</Requirement>
@@ -41,10 +41,9 @@
                 <Indicate>Excluded</Indicate>
                 <WritableAuxiliaries>Excluded</WritableAuxiliaries>
                 <Broadcast>Excluded</Broadcast>
-            </Properties>
-        </Characteristic>
-        <Characteristic type="org.bluetooth.characteristic.body_composition_measurement"
-                        name="Body Composition Measurement">
+			</Properties>
+		</Characteristic>
+        <Characteristic type="org.bluetooth.characteristic.body_composition_measurement" name="Body Composition Measurement">
             <Requirement>Mandatory</Requirement>
             <Properties>
                 <Read>Excluded</Read>
@@ -56,17 +55,17 @@
                 <Indicate>Mandatory</Indicate>
                 <WritableAuxiliaries>Excluded</WritableAuxiliaries>
                 <Broadcast>Excluded</Broadcast>
-            </Properties>
+			</Properties>
             <Descriptors>
-                <Descriptor type="org.bluetooth.descriptor.gatt.client_characteristic_configuration"
-                            name="Client Characteristic Configuration">
-                    <Requirement>Mandatory</Requirement>
-                    <Properties>
-                        <Read>Mandatory</Read>
-                        <Write>Mandatory</Write>
-                    </Properties>
+                <Descriptor type="org.bluetooth.descriptor.gatt.client_characteristic_configuration" name="Client Characteristic Configuration">
+                   <Requirement>Mandatory</Requirement> 
+                   <Properties>
+                    <Read>Mandatory</Read>
+                    <Write>Mandatory</Write>
+                 </Properties>
                 </Descriptor>
-            </Descriptors>
-        </Characteristic>
-    </Characteristics>
+			</Descriptors>
+		</Characteristic>
+        
+	</Characteristics>
 </Service>

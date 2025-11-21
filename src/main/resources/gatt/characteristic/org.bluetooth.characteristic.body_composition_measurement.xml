@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><!--Copyright 2014 Bluetooth SIG, Inc. All rights reserved.-->
-<Characteristic xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/characteristic.xsd"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Body Composition Measurement"
-                type="org.bluetooth.characteristic.body_composition_measurement" uuid="2A9C" last-modified="2014-10-17"
-                approved="Yes">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright 2014 Bluetooth SIG, Inc. All rights reserved.-->
+<Characteristic xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/characteristic.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                name="Body Composition Measurement" type="org.bluetooth.characteristic.body_composition_measurement" uuid="2A9C" last-modified="2014-10-17" approved="Yes">
     <Value>
         <Field name="Flags">
             <Requirement>Mandatory</Requirement>
@@ -10,87 +9,83 @@
             <BitField>
                 <Bit index="0" size="1" name="Measurement Units">
                     <Enumerations>
-                        <Enumeration key="0"
-                                     value="SI (Weight and Mass in units of kilogram (kg) and Height in units of meter)"
-                                     requires="C1"/>
-                        <Enumeration key="1"
-                                     value="Imperial (Weight and Mass in units of pound (lb) and Height in units of inch (in))"
-                                     requires="C2"/>
+                        <Enumeration key="0" value="SI (Weight and Mass in units of kilogram (kg) and Height in units of meter)" requires="C1" />
+                        <Enumeration key="1" value="Imperial (Weight and Mass in units of pound (lb) and Height in units of inch (in))" requires="C2" />
                     </Enumerations>
                 </Bit>
                 <Bit index="1" size="1" name="Time Stamp Present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C3"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C3" />
                     </Enumerations>
                 </Bit>
                 <Bit index="2" size="1" name="User ID present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C4"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C4" />
                     </Enumerations>
                 </Bit>
                 <Bit index="3" size="1" name="Basal Metabolism present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C5"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C5" />
                     </Enumerations>
                 </Bit>
                 <Bit index="4" size="1" name="Muscle Percentage present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C6"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C6" />
                     </Enumerations>
                 </Bit>
                 <Bit index="5" size="1" name="Muscle Mass present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C7"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C7" />
                     </Enumerations>
                 </Bit>
                 <Bit index="6" size="1" name="Fat Free Mass present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C8"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C8" />
                     </Enumerations>
                 </Bit>
                 <Bit index="7" size="1" name="Soft Lean Mass present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C9"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C9" />
                     </Enumerations>
                 </Bit>
                 <Bit index="8" size="1" name="Body Water Mass present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C10"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C10" />
                     </Enumerations>
                 </Bit>
                 <Bit index="9" size="1" name="Impedance present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C11"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C11" />
                     </Enumerations>
                 </Bit>
                 <Bit index="10" size="1" name="Weight present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C12"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C12" />
                     </Enumerations>
                 </Bit>
                 <Bit index="11" size="1" name="Height present">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True" requires="C13"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" requires="C13" />
                     </Enumerations>
                 </Bit>
                 <Bit index="12" size="1" name="Multiple Packet Measurement">
                     <Enumerations>
-                        <Enumeration key="0" value="False"/>
-                        <Enumeration key="1" value="True"/>
+                        <Enumeration key="0" value="False" />
+                        <Enumeration key="1" value="True" />
                     </Enumerations>
                 </Bit>
-                <ReservedForFutureUse index="13" size="3"/>
+                <ReservedForFutureUse index="13" size="3" />
             </BitField>
         </Field>
         <Field name="Body Fat Percentage">
@@ -118,8 +113,7 @@
             <Unit>org.bluetooth.unit.unitless</Unit>
             <DecimalExponent>0</DecimalExponent>
             <Enumerations>
-                <InformativeText>The special value of 0xFF (255 Decimal) for User ID represents ?unknown user?.
-                </InformativeText>
+                <InformativeText>The special value of 0xFF (255 Decimal) for User ID represents “unknown user”.</InformativeText>
                 <Enumeration key="255" value="unknown user"></Enumeration>
             </Enumerations>
         </Field>
@@ -175,8 +169,7 @@
         </Field>
         <Field name="Fat Free Mass - Pounds">
             <InformativeText>
-                Unit is in pounds with a resolution of 0.01. Note: Determined when bit 0 of the Flags field is set to
-                1.
+                Unit is in pounds with a resolution of 0.01. Note: Determined when bit 0 of the Flags field is set to 1.
             </InformativeText>
             <Requirement>C2</Requirement>
             <Requirement>C8</Requirement>
@@ -186,8 +179,7 @@
         </Field>
         <Field name="Soft Lean Mass - Kilograms">
             <InformativeText>
-                Unit is in kilograms with a resolution of 0.005. Note: Determined when bit 0 of the Flags field is set
-                to 0.
+                Unit is in kilograms with a resolution of 0.005. Note: Determined when bit 0 of the Flags field is set to 0.
             </InformativeText>
             <Requirement>C1</Requirement>
             <Requirement>C9</Requirement>
@@ -198,8 +190,7 @@
         </Field>
         <Field name="Soft Lean Mass - Pounds">
             <InformativeText>
-                Unit is in pounds with a resolution of 0.01. Note: Determined when bit 0 of the Flags field is set to
-                1.
+                Unit is in pounds with a resolution of 0.01. Note: Determined when bit 0 of the Flags field is set to 1.
             </InformativeText>
             <Requirement>C2</Requirement>
             <Requirement>C9</Requirement>
@@ -209,8 +200,7 @@
         </Field>
         <Field name="Body Water Mass - Kilograms">
             <InformativeText>
-                Unit is in kilograms with a resolution of 0.005. Note: Determined when bit 0 of the Flags field is set
-                to 0.
+                Unit is in kilograms with a resolution of 0.005. Note: Determined when bit 0 of the Flags field is set to 0.
             </InformativeText>
             <Requirement>C1</Requirement>
             <Requirement>C10</Requirement>
@@ -221,8 +211,7 @@
         </Field>
         <Field name="Body Water Mass - Pounds">
             <InformativeText>
-                Unit is in pounds with a resolution of 0.01. Note: Determined when bit 0 of the Flags field is set to
-                1.
+                Unit is in pounds with a resolution of 0.01. Note: Determined when bit 0 of the Flags field is set to 1.
             </InformativeText>
             <Requirement>C2</Requirement>
             <Requirement>C10</Requirement>
@@ -241,8 +230,7 @@
         </Field>
         <Field name="Weight - Kilograms">
             <InformativeText>
-                Unit is in kilograms with a resolution of 0.005. Note: Determined when bit 0 of the Flags field is set
-                to 0.
+                Unit is in kilograms with a resolution of 0.005. Note: Determined when bit 0 of the Flags field is set to 0.
             </InformativeText>
             <Requirement>C1</Requirement>
             <Requirement>C12</Requirement>
@@ -253,8 +241,7 @@
         </Field>
         <Field name="Weight - Pounds">
             <InformativeText>
-                Unit is in pounds with a resolution of 0.01. Note: Determined when bit 0 of the Flags field is set to
-                1.
+                Unit is in pounds with a resolution of 0.01. Note: Determined when bit 0 of the Flags field is set to 1.
             </InformativeText>
             <Requirement>C2</Requirement>
             <Requirement>C12</Requirement>
@@ -264,8 +251,7 @@
         </Field>
         <Field name="Height - Meters">
             <InformativeText>
-                Unit is in meters with a resolution of 0.001. Note: Determined when bit 0 of the Flags field is set to
-                0.
+                Unit is in meters with a resolution of 0.001. Note: Determined when bit 0 of the Flags field is set to 0.
             </InformativeText>
             <Requirement>C1</Requirement>
             <Requirement>C13</Requirement>
@@ -285,8 +271,6 @@
         </Field>
     </Value>
     <Note>
-        <p>The fields in the above table are in the order of LSO to MSO. Where LSO = Least Significant Octet and MSO =
-            Most Significant Octet.
-        </p>
+        <p>The fields in the above table are in the order of LSO to MSO. Where LSO = Least Significant Octet and MSO = Most Significant Octet.</p>
     </Note>
 </Characteristic>

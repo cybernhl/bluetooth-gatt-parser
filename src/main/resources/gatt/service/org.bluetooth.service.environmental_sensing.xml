@@ -1,14 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Copyright 2014 Bluetooth SIG, Inc. All rights reserved. -->
-<Service xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/service.xsd"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="org.bluetooth.service.environmental_sensing"
-         uuid="181A" name="Environmental Sensing" last-modified="2014-11-20" approved="Yes">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014 Bluetooth SIG, Inc. All rights reserved. -->
+<Service xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/service.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+type="org.bluetooth.service.environmental_sensing" uuid="181A" name="Environmental Sensing" last-modified="2014-11-20" approved="Yes">
     <InformativeText>
-        <Abstract>This service exposes measurement data from an environmental sensor intended for sports and fitness
-            applications. A wide range of environmental parameters is supported.
-        </Abstract>
-        <Summary>The Environmental Sensing Service (ESS) exposes measurement data from an environmental sensor intended
-            for sports and fitness applications. A wide range of environmental parameters is supported.
-        </Summary>
+        <Abstract>This service exposes measurement data from an environmental sensor intended for sports and fitness applications. A wide range of environmental parameters is supported.</Abstract>
+        <Summary>The Environmental Sensing Service (ESS) exposes measurement data from an environmental sensor intended for sports and fitness applications. A wide range of environmental parameters is supported.</Summary>
     </InformativeText>
     <Dependencies>
         <Dependency>
@@ -16,26 +12,12 @@
         </Dependency>
     </Dependencies>
     <GATTRequirements>
-        <Requirement subProcedure="Notifications">Mandatory if the Server supports the ES Trigger Setting descriptor;
-            excluded otherwise.
-        </Requirement>
-        <Requirement subProcedure="Indications">Mandatory if the Descriptor Value Changed characteristic is supported;
-            optional otherwise.
-        </Requirement>
+        <Requirement subProcedure="Notifications"> Mandatory if the Server supports the ES Trigger Setting descriptor; excluded otherwise.</Requirement>
+        <Requirement subProcedure="Indications">Mandatory if the Descriptor Value Changed characteristic is supported; optional otherwise.</Requirement>
         <Requirement subProcedure="Read Characteristic Descriptors">Mandatory</Requirement>
-        <Requirement subProcedure="Read Long Characteristic Descriptors">Mandatory if the Server supports reading a
-            Characteristic User Description descriptor string length that exceeds the capacity of the default ATT_MTU;
-            optional otherwise.
-        </Requirement>
-        <Requirement subProcedure="Write Characteristic Descriptors">Mandatory if the Server supports the Descriptor
-            Value Changed characteristic or notification of the ESS Characteristic or writing to the Characteristic
-            User Description descriptor, ES Trigger Setting descriptor or ES Configuration descriptor; optional
-            otherwise.
-        </Requirement>
-        <Requirement subProcedure="Write Long Characteristic Descriptors">Mandatory if the Server supports writing a
-            Characteristic User Description descriptor string length that exceeds the capacity of the default ATT_MTU;
-            optional otherwise.
-        </Requirement>
+        <Requirement subProcedure="Read Long Characteristic Descriptors">Mandatory if the Server supports reading a Characteristic User Description descriptor string length that exceeds the capacity of the default ATT_MTU; optional otherwise.</Requirement>
+        <Requirement subProcedure="Write Characteristic Descriptors">Mandatory if the Server supports the Descriptor Value Changed characteristic or notification of the ESS Characteristic or writing to the Characteristic User Description descriptor, ES Trigger Setting descriptor or ES Configuration descriptor; optional otherwise.</Requirement>
+        <Requirement subProcedure="Write Long Characteristic Descriptors">Mandatory if the Server supports writing a Characteristic User Description descriptor string length that exceeds the capacity of the default ATT_MTU; optional otherwise.</Requirement>
     </GATTRequirements>
     <Transports>
         <Classic>true</Classic>
@@ -43,17 +25,14 @@
         <HighSpeed>true</HighSpeed>
     </Transports>
     <ErrorCodes>
-        <ErrorCode name="Write Request Rejected" code="0x80"
-                   Description="An attempt was made to write a value to the descriptor that is invalid or not supported by this Server."/>
-        <ErrorCode name="Condition not supported" code="0x81"
-                   Description="An attempt was made to write a value to the Condition field of the ES Trigger Setting descriptor that is invalid or not supported by this Server."/>
+        <ErrorCode name="Write Request Rejected" code="0x80" Description="An attempt was made to write a value to the descriptor that is invalid or not supported by this Server." />
+        <ErrorCode name="Condition not supported" code="0x81" Description="An attempt was made to write a value to the Condition field of the ES Trigger Setting descriptor that is invalid or not supported by this Server." />
     </ErrorCodes>
     <Characteristics>
         <Characteristic type="org.bluetooth.characteristic.descriptor_value_changed" name="Descriptor Value Changed">
             <InformativeText>
-                C.2: Mandatory if any of the following descriptors can be changed by the Server: ES Measurement, ES
-                Trigger Setting, ES Configuration, Characteristic User Description.
-                C.3: Mandatory if the write property is supported for the Characteristic User Description descriptor.
+                C.2:  Mandatory if any of the following descriptors can be changed by the Server: ES Measurement, ES Trigger Setting, ES Configuration, Characteristic User Description.
+                C.3:  Mandatory if the write property is supported for the Characteristic User Description descriptor.
             </InformativeText>
             <Requirement>C2 or C3</Requirement>
             <Properties>
@@ -96,10 +75,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -107,9 +83,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -118,8 +92,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -162,10 +135,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -173,9 +143,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -184,8 +152,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -228,10 +195,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -239,9 +203,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -250,8 +212,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -294,10 +255,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -305,9 +263,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -316,8 +272,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -360,10 +315,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -371,9 +323,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -382,8 +332,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -426,10 +375,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -437,9 +383,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -448,8 +392,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -492,10 +435,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -503,9 +443,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -514,8 +452,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -558,10 +495,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -569,9 +503,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -580,8 +512,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -624,10 +555,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -635,9 +563,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -646,8 +572,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -690,10 +615,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -701,9 +623,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -712,8 +632,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -756,10 +675,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -767,9 +683,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -778,8 +692,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -822,10 +735,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -833,9 +743,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -844,8 +752,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -861,6 +768,7 @@
                 </Descriptor>
             </Descriptors>
         </Characteristic>
+        
         <Characteristic type="org.bluetooth.characteristic.true_wind_direction" name="True Wind Direction">
             <InformativeText>
                 C1:
@@ -888,10 +796,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -899,9 +804,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -910,8 +813,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -954,10 +856,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -965,9 +864,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -976,8 +873,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1020,10 +916,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1031,9 +924,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -1042,8 +933,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1086,10 +976,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1097,9 +984,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -1108,8 +993,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1152,10 +1036,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1163,9 +1044,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -1174,8 +1053,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1218,10 +1096,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1229,9 +1104,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -1240,8 +1113,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1284,10 +1156,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1295,9 +1164,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -1306,8 +1173,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1350,10 +1216,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Trigger Setting" type="org.bluetooth.descriptor.es_trigger_setting">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
-                    </InformativeText>
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.</InformativeText>
                     <Requirement>if_notify_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -1361,9 +1224,7 @@
                     </Properties>
                 </Descriptor>
                 <Descriptor name="ES Configuration" type="org.bluetooth.descriptor.es_configuration">
-                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1
-                        of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES
-                        Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
+                    <InformativeText>C1: If Write is supported, bonding is mandatory as described in Section 3.1.2.3.1 of the Service Specification. If the ES Trigger Setting descriptor is writable, an ES Configuration descriptor, if present, is also writable. Otherwise, both are read-only.
                         C2: Mandatory if there is more than one ES Trigger Setting Descriptor
                     </InformativeText>
                     <Requirement>C2</Requirement>
@@ -1372,8 +1233,7 @@
                         <Write>C1</Write>
                     </Properties>
                 </Descriptor>
-                <Descriptor name="Characteristic User Description"
-                            type="org.bluetooth.descriptor.gatt.characteristic_user_description">
+                <Descriptor name="Characteristic User Description" type="org.bluetooth.descriptor.gatt.characteristic_user_description">
                     <Requirement>Optional</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>

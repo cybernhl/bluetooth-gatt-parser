@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><!-- Copyright 2011 Bluetooth SIG, Inc. All rights reserved. -->
-<Service xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/service.xsd"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Running Speed and Cadence"
-         type="org.bluetooth.service.running_speed_and_cadence" uuid="1814" last-modified="2012-3-26" approved="Yes">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2011 Bluetooth SIG, Inc. All rights reserved. -->
+<Service xsi:noNamespaceSchemaLocation="http://schemas.bluetooth.org/Documents/service.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Running Speed and Cadence" type="org.bluetooth.service.running_speed_and_cadence" uuid="1814" last-modified="2012-3-26" approved="Yes">
     <InformativeText>
         <Abstract>
-            This service exposes speed, cadence and other data from a Running Speed and Cadence Sensor intended for
-            fitness applications.
+            This service exposes speed, cadence and other data from a Running Speed and Cadence Sensor intended for fitness applications.
         </Abstract>
         <Summary>
-            The Running Speed and Cadence (RSC) Service exposes speed, cadence and other data related to fitness
-            applications such as the stride length and the total distance the user has traveled while using the Speed
-            and Cadence Sensor (Server).
+            The Running Speed and Cadence (RSC) Service exposes speed, cadence and other data related to fitness applications such as the stride length and the total distance the user has traveled while using the Speed and Cadence Sensor (Server).
         </Summary>
     </InformativeText>
     <Dependencies>
@@ -23,19 +19,14 @@
         <Requirement subProcedure="Read Characteristic Descriptors">Mandatory</Requirement>
         <Requirement subProcedure="Write Characteristic Descriptors">Mandatory</Requirement>
     </GATTRequirements>
-    <Note>C1: Mandatory if the SC Control Point characteristic is supported, otherwise excluded for this service.
-    </Note>
+    <Note>C1: Mandatory if the SC Control Point characteristic is supported, otherwise excluded for this service.</Note>
     <Transports>
         <Classic>true</Classic>
         <LowEnergy>true</LowEnergy>
     </Transports>
     <ErrorCodes>
-        <ErrorCode name="Procedure Already in Progress" code="0x80">A SC Control Point request cannot be serviced
-            because a previously triggered SC Control Point operation is still in progress.
-        </ErrorCode>
-        <ErrorCode name="Client Characteristic Configuration descriptor improperly configured" code="0x81">The Client
-            Characteristic Configuration descriptor is not configured according to the requirements of the service.
-        </ErrorCode>
+        <ErrorCode name="Procedure Already in Progress" code="0x80">A SC Control Point request cannot be serviced because a previously triggered SC Control Point operation is still in progress.</ErrorCode>
+        <ErrorCode name="Client Characteristic Configuration descriptor improperly configured" code="0x81">The Client Characteristic Configuration descriptor is not configured according to the requirements of the service.</ErrorCode>
     </ErrorCodes>
     <Characteristics>
         <Characteristic name="RSC Measurement" type="org.bluetooth.characteristic.rsc_measurement">
@@ -55,8 +46,7 @@
                 <Broadcast>Excluded</Broadcast>
             </Properties>
             <Descriptors>
-                <Descriptor name="Client Characteristic Configuration"
-                            type="org.bluetooth.descriptor.gatt.client_characteristic_configuration">
+                <Descriptor name="Client Characteristic Configuration" type="org.bluetooth.descriptor.gatt.client_characteristic_configuration">
                     <Requirement>Mandatory</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
@@ -67,8 +57,7 @@
         </Characteristic>
         <Characteristic name="RSC Feature" type="org.bluetooth.characteristic.rsc_feature">
             <InformativeText>
-                The RSC Feature characteristic is used to describe the supported features of the Server. Reserved for
-                Future Use (RFU) bits in the SC Feature characteristic value are set to 0.
+                The RSC Feature characteristic is used to describe the supported features of the Server. Reserved for Future Use (RFU) bits in the SC Feature characteristic value are set to 0.
             </InformativeText>
             <Requirement>Mandatory</Requirement>
             <Properties>
@@ -85,13 +74,8 @@
         </Characteristic>
         <Characteristic name="Sensor Location" type="org.bluetooth.characteristic.sensor_location">
             <InformativeText>
-                <p>The Sensor Location characteristic of the device is used to describe the physical location of the
-                    Server when correctly fitted.
-                </p>
-                <p>
-                    <b>C1:</b>
-                    Mandatory if the Multiple Sensor Location feature is supported, otherwise optional.
-                </p>
+                <p>The Sensor Location characteristic of the device is used to describe the physical location of the Server when correctly fitted.</p>
+                <p><b>C1:</b> Mandatory if the Multiple Sensor Location feature is supported, otherwise optional.</p>
             </InformativeText>
             <Requirement>C1</Requirement>
             <Properties>
@@ -108,17 +92,9 @@
         </Characteristic>
         <Characteristic name="SC Control Point" type="org.bluetooth.characteristic.sc_control_point">
             <InformativeText>
-                <p>If the SC Control Point is supported, profiles utilizing this service are required to ensure that
-                    the Client configures the SC Control Point characteristic for indications (i.e. via the Client
-                    Characteristic Configuration descriptor) at the first connection.
-                </p>
-                <p>Support for this characteristic is mandatory if the Server supports Calibration Procedure, Total
-                    Distance or Multiple Sensor Locations features, otherwise it is excluded.
-                </p>
-                <p>
-                    <b>C2:</b>
-                    Mandatory if at least one SC Control Point procedure is supported, otherwise excluded.
-                </p>
+                <p>If the SC Control Point is supported, profiles utilizing this service are required to ensure that the Client configures the SC Control Point characteristic for indications (i.e. via the Client Characteristic Configuration descriptor) at the first connection.</p>
+                <p>Support for this characteristic is mandatory if the Server supports Calibration Procedure, Total Distance or Multiple Sensor Locations features, otherwise it is excluded.</p>
+                <p><b>C2:</b> Mandatory if at least one SC Control Point procedure is supported, otherwise excluded.</p>
             </InformativeText>
             <Requirement>C2</Requirement>
             <Properties>
@@ -132,9 +108,9 @@
                 <WritableAuxiliaries>Excluded</WritableAuxiliaries>
                 <Broadcast>Excluded</Broadcast>
             </Properties>
+            
             <Descriptors>
-                <Descriptor name="Client Characteristic Configuration"
-                            type="org.bluetooth.descriptor.gatt.client_characteristic_configuration">
+                <Descriptor name="Client Characteristic Configuration" type="org.bluetooth.descriptor.gatt.client_characteristic_configuration">
                     <Requirement>if_characteristic_supported</Requirement>
                     <Properties>
                         <Read>Mandatory</Read>
