@@ -6,37 +6,6 @@ plugins {
     id 'maven-publish'
 }
 
-repositories {
-    gradlePluginPortal()
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
-    mavenLocal()
-    mavenCentral()
-    maven {
-        url = uri('https://oss.sonatype.org/content/repositories/snapshots')
-    }
-    maven {
-        url = uri('https://oss.sonatype.org/content/repositories/releases')
-    }
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
-    maven {
-        url = uri('https://oss.sonatype.org/content/repositories/snapshots')
-    }
-    maven {
-        url = uri('https://oss.sonatype.org/content/repositories/releases')
-    }
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
-    google()
-    maven {
-        url = uri('https://maven.pkg.jetbrains.space/public/p/compose/dev')
-    }
-}
-
 dependencies {
     implementation gradleApi()
     implementation localGroovy()

@@ -1,1 +1,112 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            url ="https://plugins.gradle.org/m2/"
+        }
+        google() {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        maven {
+            url = uri('https://repo.maven.apache.org/maven2/')
+        }
+        mavenLocal()
+        maven {
+            url ="https://oss.sonatype.org/content/repositories/snapshots"
+            name ="SonatypeSnapshots"
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
+        maven {
+            url = uri('https://oss.sonatype.org/content/repositories/releases')
+        }
+        maven { url = "https://maven.aliyun.com/repository/gradle-plugin/" }
+        maven { url = "https://maven.aliyun.com/repository/spring-plugin/" }
+        maven { url = "https://jitpack.io" }
+        maven { url = "https://s3.amazonaws.com/repo.commonsware.com" }
+        maven { url = "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
+        maven { url = "https://api.xposed.info/" }
+        maven { url = "https://jogamp.org/deployment/maven" }
+        maven { url = "https://developer.huawei.com/repo/" }
+        maven { url = "https://raw.githubusercontent.com/cybernhl/maven-repository/master/" }
+        maven { url = "https://maven.aliyun.com/repository/jcenter" }
+        maven { url = "https://maven.aliyun.com/repository/public/" }
+        maven { url = "https://maven.aliyun.com/repository/spring/" }
+        maven { url = "https://maven.aliyun.com/repository/google/" }
+        maven { url = "https://maven.aliyun.com/repository/grails-core/" }
+        maven { url = "https://maven.aliyun.com/repository/apache-snapshots/" }
+        maven { url = "https://packages.jetbrains.team/maven/p/skija/maven" }
+    }
+    plugins {
+
+    }
+}
+
+plugins {
+    id "org.gradle.toolchains.foojay-resolver-convention" version "1.0.0"
+}
+
+def fullVersion = System.getProperty("java.version", "8.0.0")
+def versionComponents = fullVersion
+        .split("\\.")
+    .take(2)
+    .findAll { it.length() > 0 }
+    .collect { Integer.parseInt(it) }
+
+def currentJdk
+        if (versionComponents[0] == 1) {
+            currentJdk = versionComponents[1]
+        } else {
+            currentJdk = versionComponents[0]
+        }
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        maven {
+            url  "https://repo.maven.apache.org/maven2/"
+        }
+        google() {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots"
+            name "SonatypeSnapshots"
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
+        maven {
+            url  "https://oss.sonatype.org/content/repositories/releases"
+        }
+        maven { url = "https://maven.aliyun.com/repository/gradle-plugin/" }
+        maven { url = "https://maven.aliyun.com/repository/spring-plugin/" }
+        maven { url = "https://jitpack.io" }
+        maven { url = "https://s3.amazonaws.com/repo.commonsware.com" }
+        maven { url = "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
+        maven { url = "https://api.xposed.info/" }
+        maven { url = "https://jogamp.org/deployment/maven" }
+        maven { url = "https://developer.huawei.com/repo/" }
+        maven { url = "https://raw.githubusercontent.com/cybernhl/maven-repository/master/" }
+        maven { url = "https://maven.aliyun.com/repository/jcenter" }
+        maven { url = "https://maven.aliyun.com/repository/public/" }
+        maven { url = "https://maven.aliyun.com/repository/spring/" }
+        maven { url = "https://maven.aliyun.com/repository/google/" }
+        maven { url = "https://maven.aliyun.com/repository/grails-core/" }
+        maven { url = "https://maven.aliyun.com/repository/apache-snapshots/" }
+        maven { url = "https://packages.jetbrains.team/maven/p/skija/maven" }
+    }
+}
+
 rootProject.name = "bluetooth-gatt-parser"
