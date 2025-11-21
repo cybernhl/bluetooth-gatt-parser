@@ -1,0 +1,140 @@
+import groovy.json.JsonBuilder
+
+plugins {
+    id 'java-library'
+    id "groovy-base"
+    id 'maven-publish'
+}
+
+repositories {
+    gradlePluginPortal()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url = uri('https://oss.sonatype.org/content/repositories/snapshots')
+    }
+    maven {
+        url = uri('https://oss.sonatype.org/content/repositories/releases')
+    }
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+    maven {
+        url = uri('https://oss.sonatype.org/content/repositories/snapshots')
+    }
+    maven {
+        url = uri('https://oss.sonatype.org/content/repositories/releases')
+    }
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+    google()
+    maven {
+        url = uri('https://maven.pkg.jetbrains.space/public/p/compose/dev')
+    }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    api libs.org.slf4j.slf4j.api
+    api libs.com.thoughtworks.xstream.xstream
+    api libs.gson
+    api libs.commons.beanutils.commons.beanutils
+    api libs.com.google.guava.guava
+    testImplementation libs.junit
+    testImplementation libs.org.slf4j.slf4j.simple
+    testImplementation libs.org.mockito.mockito.all
+    testImplementation libs.org.powermock.powermock.module.junit4
+    testImplementation libs.org.powermock.powermock.api.mockito
+}
+
+group = 'org.sputnikdev'
+version = '1.9.5-SNAPSHOT'
+description = 'org.sputnikdev:bluetooth-gatt-parser'
+
+java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
+
+abstract class GenerateGattRegistryTask extends DefaultTask {
+
+    @InputDirectory
+    abstract DirectoryProperty getInputDirectory()
+
+    @OutputFile
+    abstract RegularFileProperty getOutputFile()
+
+    @TaskAction
+    void generate() {
+        def output = getOutputFile().get().asFile
+        // 確保目標資料夾存在
+        output.parentFile.mkdirs()
+
+        def parser = new XmlParser()
+        parser.setFeature('http://apache.org/xml/features/disallow-doctype-decl', true)
+
+        def registry = [:]// 使用 Groovy Map 來儲存結果
+        // 遍歷輸入目錄中所有的 .xml 檔案
+        getInputDirectory().get().asFile.eachFileMatch(~/.*\.xml/) { file ->
+            def xml = parser.parse(file)
+            def type = xml.attributes()['type']
+            if ("${type}.xml" != file.name) {
+                throw new IllegalStateException(
+                        "GATT registry generation failed in task ${name}. 'type' attribute ($type) does not match its file name ($file.name)")
+            }
+            registry.put(xml.attributes()["uuid"], xml.attributes()["type"])
+        }
+        // 使用 JsonBuilder 將 Map 轉換為格式化的 JSON 字串並寫入檔案
+        output.write(new JsonBuilder(registry).toPrettyString(), 'UTF-8')
+    }
+}
+
+def gattResourcesDir = layout.projectDirectory.dir("./src/main/resources/gatt")
+def gattBuildDir = layout.buildDirectory.get().dir("resources/main/gatt")
+
+def generatorTasks = tasks.register("generateAllGattJson") {
+    group = "Generator"
+    description = "Generates all GATT JSON specification files."
+}
+
+def pathsToGenerate = ["characteristic", "service"] // 這兩個是從原始 pom.xml 的 build-helper-maven-plugin 推斷出的完整列表 & groovy 腳本中明確指定的
+// 如果需要處理更多目錄，只需在此陣列中加入即可，例如：
+// def pathsToGenerate = ["characteristic/descriptor", "characteristic/attribute", "descriptor", "attribute", "characteristic", "service"]
+//["characteristic/descriptor", "characteristic/attribute", "descriptor", "attribute", "characteristic", "service"]
+pathsToGenerate.each { path ->
+    def taskName = "generateGattJsonFor${path.replace('/', '_').capitalize()}"
+    def generatedTask = tasks.register(taskName, GenerateGattRegistryTask) {
+        group = "Generator"
+        description = "Generates GATT JSON for ${path}"
+
+        inputDirectory.set(gattResourcesDir.dir(path))
+        outputFile.set(gattBuildDir.file("${path}/gatt_spec_registry.json"))
+    }
+    // 將所有生成的 task 設為一個總 task 的依賴
+    generatorTasks.configure { dependsOn(generatedTask) }
+}
+
+tasks.named("processResources") {
+    dependsOn(generatorTasks)
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
