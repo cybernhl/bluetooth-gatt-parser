@@ -74,7 +74,7 @@ def generatorTasks = tasks.register("generateAllGattJson") {
 
 def pathsToGenerate = ["characteristic", "service"] // 這兩個是從原始 pom.xml 的 build-helper-maven-plugin 推斷出的完整列表 & groovy 腳本中明確指定的
 // 如果需要處理更多目錄，只需在此陣列中加入即可，例如：
-// def pathsToGenerate = ["characteristic/descriptor", "characteristic/attribute", "descriptor", "attribute", "characteristic", "service"]
+// def pathsToGenerate = ["descriptor", "attribute",  "characteristic", "service"]
 //["characteristic/descriptor", "characteristic/attribute", "descriptor", "attribute", "characteristic", "service"]
 pathsToGenerate.each { path ->
     def taskName = "generateGattJsonFor${path.replace('/', '_').capitalize()}"
