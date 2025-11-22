@@ -150,14 +150,18 @@ tasks.withType(Javadoc) {
 }
 
 dependencies {
-    implementation gradleApi()
-    implementation localGroovy()
+    compileOnly gradleApi()
+    compileOnly localGroovy()
     implementation libs.kotlin.stdlib
-    api libs.org.slf4j.slf4j.api
-    api libs.com.thoughtworks.xstream.xstream
-    api libs.gson
-    api libs.commons.beanutils.commons.beanutils
-    api libs.com.google.guava.guava
+    implementation libs.org.slf4j.slf4j.api
+    implementation (libs.com.thoughtworks.xstream.xstream) {
+        exclude group: 'xpp3', module: 'xpp3_min'
+    }
+    implementation libs.gson
+    implementation libs.commons.beanutils.commons.beanutils
+    implementation(libs.com.google.guava.guava) {
+        exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
     testImplementation libs.junit
     testImplementation libs.org.slf4j.slf4j.simple
     testImplementation libs.org.mockito.mockito.all
